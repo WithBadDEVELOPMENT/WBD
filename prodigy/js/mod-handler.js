@@ -1,17 +1,3 @@
-/*
-	Simple mod interface for Prodigy version 2-45-0
-	
-	Installed Mods: 
-		
-		| Mod Name |               	| Author |
-		
-		Walk Speed 					Daboss7173
-		Fast Game Speed				Daboss7173
-		Imitation Titan				Daboss7173
-	
-	Written by: Daboss7173
-	Github: https://github.com/Daboss7173/Daboss7173.github.io
-*/
 (async () => {
 	
 	/*

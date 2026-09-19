@@ -1,0 +1,12 @@
+[TITLE] Active Development Survey
+[INTRO] Submit your answers to help us optimize the upcoming project roadmap variables.
+
+[QUESTION] Which feature should we build next?
+[OPTION] Multiplayer Matchmaking Engine
+[OPTION] Advanced Developer API Sandbox
+[OPTION] Modding & Extension Support Docs
+
+[QUESTION] What is your preferred platform?
+[OPTION] PC / Desktop Native Launcher
+[OPTION] Web App Sandbox / GitHub Pages Embed
+[OPTION] Mobile Interface Optimization

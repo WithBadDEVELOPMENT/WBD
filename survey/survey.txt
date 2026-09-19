@@ -1,12 +1,43 @@
 [TITLE] Active Development Survey
 [INTRO] Submit your answers to help us optimize the upcoming project roadmap variables.
 
-[QUESTION] Which feature should we build next?
-[OPTION] Multiplayer Matchmaking Engine
-[OPTION] Advanced Developer API Sandbox
-[OPTION] Modding & Extension Support Docs
+[QUESTION] Opinion on what engine do you prefer for most games/apps going forward?
+[OPTION] UNITY
+[OPTION] Godot
+[OPTION] Unreal Engine
+[OPTION] VSCode
+[OPTION] No Preference
 
 [QUESTION] What is your preferred platform?
-[OPTION] PC / Desktop Native Launcher
-[OPTION] Web App Sandbox / GitHub Pages Embed
-[OPTION] Mobile Interface Optimization
+[OPTION] PC
+[OPTION] Console
+[OPTION] Mobile
+[OPTION] Virtual Reality
+[OPTION] No Preference
+
+[QUESTION] What is your preferred game genre?
+[OPTION] Horror
+[OPTION] Fantasy
+[OPTION] Puzzle
+[OPTION] Survival
+[OPTION] No Preference
+
+[QUESTION] What would you like to see more of on this website?
+[OPTION] Small Updates (Ex: Performance, and Bug Fixes.)
+[OPTION] Major Updates (Ex: New Features, and Customization.)
+[OPTION] Both
+[OPTION] Niether
+[OPTION] No Preference
+
+[QUESTION] What would you like to see more of in the future?
+[OPTION] More Original Games
+[OPTION] More Remakes
+[OPTION] Apps
+[OPTION] All Of The Above
+[OPTION] Niether
+[OPTION] No Preference
+
+[QUESTION] Would you like to see public branding? (Ex: Merch, or Other Branding Assets.)
+[OPTION] Yes
+[OPTION] No
+[OPTION] No Preference

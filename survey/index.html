@@ -19,15 +19,18 @@
             border-bottom: 1px solid #21262d;
             padding-bottom: 8px;
         }
-        .stats-container {
+        .poll-container {
             background-color: #161b22;
             border: 1px solid #30363d;
             border-radius: 6px;
             padding: 20px;
             margin-top: 20px;
-            /* Keeps the text format aligned nicely */
-            white-space: pre-wrap; 
-            font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+            text-align: center;
+        }
+        .poll-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
         }
     </style>
 </head>
@@ -40,16 +43,19 @@
 
     <main>
         <section>
-            <h2>📊 WakaTime Coding Weekly Stats</h2>
-            <div class="stats-container">
-[![poll](https://wakatime.com/polls/e00adeb0-79f4-42dc-87ff-0d8fc528ff30.png)](https://wakatime.com/polls/e00adeb0-79f4-42dc-87ff-0d8fc528ff30)
+            <h2>📊 My Live WakaTime Poll</h2>
+            <div class="poll-container">
+                <!-- This links to your poll page and displays the live updating image -->
+                <a href="https://wakatime.com/polls/e00adeb0-79f4-42dc-87ff-0d8fc528ff30" target="_blank" rel="noopener noreferrer">
+                    <img src="https://wakatime.com/polls/e00adeb0-79f4-42dc-87ff-0d8fc528ff30.png" alt="WakaTime Poll Stats">
+                </a>
             </div>
         </section>
     </main>
 
     <footer>
         <p style="text-align: center; color: #8b949e; margin-top: 40px; font-size: 0.85em;">
-            Automatically updated using GitHub Actions.
+            Powered by WakaTime
         </p>
     </footer>
 

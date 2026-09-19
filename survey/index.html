@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Help — With Bad DEVELOPMENT</title>
+<title>Survey — With Bad DEVELOPMENT</title>
 <link rel="icon" type="image/jpeg" href="../channels4_profile (1).jpg">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://googleapis.com');
 :root{--void:#090d0a;--panel:#101711;--paper:#e6eee6;--muted:#7d8b7d;--wire:#26352a;--green:#42ff72;--mono:'JetBrains Mono',monospace;--display:'Oswald',sans-serif}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -23,10 +23,10 @@ main{max-width:900px;margin:auto;padding:80px 6vw}
 .label{color:var(--green);font-size:11px;letter-spacing:.25em;text-transform:uppercase;margin-bottom:14px}
 h1{font-family:var(--display);font-size:clamp(42px,8vw,80px);text-transform:uppercase;line-height:1;margin-bottom:20px}
 .intro{color:#aebaae;max-width:650px;font-size:14px;margin-bottom:45px}
-.terminal{background:#080d09;border:1px solid var(--wire);padding:20px;margin-bottom:35px;color:#8dff9f;box-shadow:0 0 30px rgba(66,255,114,.04)}
+.terminal{background:#080d09;border:1px solid var(--wire);padding:20px;margin-bottom:45px;color:#8dff9f;box-shadow:0 0 30px rgba(66,255,114,.04)}
 .terminal span{color:var(--green)}
 
-/* Custom Poll Container styles matching your terminal style */
+/* Poll Container Layout */
 .poll-section {
     margin-bottom: 45px;
 }
@@ -41,37 +41,38 @@ h1{font-family:var(--display);font-size:clamp(42px,8vw,80px);text-transform:uppe
 .poll-container {
     background: var(--panel);
     border: 1px solid var(--wire);
-    padding: 24px;
+    padding: 30px;
     text-align: center;
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
 }
 .poll-container a {
     display: inline-block;
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    transition: transform 0.25s ease, border-color 0.25s ease;
     border: 1px solid transparent;
-    padding: 4px;
+    padding: 6px;
+    background: #080d09;
 }
 .poll-container a:hover {
     transform: scale(1.01);
     border-color: var(--green);
+    box-shadow: 0 0 15px rgba(66,255,114,.1);
 }
 .poll-container img {
     max-width: 100%;
     height: auto;
     display: block;
 }
+.poll-instruction {
+    font-size: 13px;
+    color: #a8b2a8;
+    margin-top: 20px;
+    text-align: center;
+}
+.poll-instruction a {
+    color: var(--green);
+    text-decoration: underline;
+}
 
-.help-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
-.card{background:var(--panel);border:1px solid var(--wire);padding:24px;transition:.3s}
-.card:hover{border-color:var(--green);transform:translateY(-5px);box-shadow:0 12px 30px rgba(0,0,0,.2)}
-.card h2{font-family:var(--display);font-size:21px;text-transform:uppercase;color:var(--green);margin-bottom:10px}
-.card p{font-size:13px;color:#a8b2a8}
-.card a{color:var(--green);display:inline-block;margin-top:15px;font-size:12px}
-.faq{margin-top:45px;border-top:1px solid var(--wire)}
-.faq h2{font-family:var(--display);text-transform:uppercase;font-size:30px;margin:25px 0}
-.question{padding:20px 0;border-bottom:1px solid var(--wire)}
-.question h3{font-family:var(--display);font-size:18px;text-transform:uppercase;margin-bottom:7px}
-.question p{font-size:13px;color:#9eaa9e}
 footer{margin-top:60px;padding-top:25px;border-top:1px solid var(--wire);color:var(--muted);font-size:11px}
 @media(max-width:650px){.nav{align-items:flex-start}.brand{font-size:17px}.brand img{width:38px;height:38px}}
 </style>
@@ -84,35 +85,23 @@ footer{margin-top:60px;padding-top:25px;border-top:1px solid var(--wire);color:v
 </div>
 </header>
 <main>
-<div class="label">// help.center</div>
-<h1>Help</h1>
-<p class="intro">Need help with the website, games, applications, or something else? Start here.</p>
-<div class="terminal"><div>&gt; help_center.start()</div><div>&gt; system: <span>ONLINE</span></div><div>&gt; status: <span>READY</span></div><div>&gt;_</div></div>
+<div class="label">// live.surveys</div>
+<h1>Survey</h1>
+<p class="intro">Cast your vote. Your opinion helps shape the future of our development roadmap.</p>
+<div class="terminal"><div>&gt; initialize_poll_stream()</div><div>&gt; connection: <span>SECURE</span></div><div>&gt; status: <span>COLLECTING_VOTES</span></div><div>&gt;_</div></div>
 
-<!-- Added WakaTime Poll Section Here -->
+<!-- Core WakaTime Poll Element -->
 <div class="poll-section">
-    <h2>// Live Dev Poll</h2>
+    <h2>// Active Poll</h2>
     <div class="poll-container">
         <a href="https://wakatime.com" target="_blank" rel="noopener noreferrer">
             <img src="https://wakatime.com.png" alt="WakaTime Poll Statistics">
         </a>
+        <p class="poll-instruction">Click on the image widget above or <a href="https://wakatime.com" target="_blank" rel="noopener noreferrer">click here</a> to submit or update your response directly on WakaTime.</p>
     </div>
 </div>
 
-<div class="help-grid">
-<div class="card"><h2>Game Help</h2><p>Having a problem with one of our games? Include the game name, what happened, and what you were doing when the problem happened.</p></div>
-<div class="card"><h2>Applications</h2><p>Want to join the team? Use the official applications page to submit an application.</p><a href="../applications/" target="_blank">Open Applications →</a></div>
-<div class="card"><h2>Website</h2><p>Found something broken on the website? Let us know what page you were on and what went wrong.</p></div>
-<div class="card"><h2>Community</h2><p>For community-related problems, contact the appropriate staff members through the available community channels.</p></div>
-</div>
-<div class="faq">
-<h2>Common Questions</h2>
-<div class="question"><h3>How do I join the team?</h3><p>Go to the applications page and submit an application for the role you're interested in.</p></div>
-<div class="question"><h3>Something is broken. What do I do?</h3><p>Give us as much information as possible, including the page or game, what happened, and how to reproduce it.</p></div>
-<div class="question"><h3>How do I get back home?</h3><p>Use the Home button at the top of this page.</p></div>
-<div class="question"><h3>Can I suggest something?</h3><p>Yes. Send the idea through the appropriate community channel so the team can see it.</p></div>
-</div>
-<footer>WITH BAD DEVELOPMENT · HELP CENTER</footer>
+<footer>WITH BAD DEVELOPMENT · SURVEY CENTER</footer>
 </main>
 </body>
 </html>

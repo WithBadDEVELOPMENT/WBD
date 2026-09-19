@@ -6,13 +6,24 @@
 <title>Survey — With Bad DEVELOPMENT</title>
 <link rel="icon" type="image/jpeg" href="../channels4_profile (1).jpg">
 
-<!-- Google Fonts loaded directly via HTML links so they never fail to load -->
+<!-- Enhanced Font Loading Strategy: Standard link paths plus direct system fallbacks inside the CSS -->
 <link rel="preconnect" href="https://googleapis.com">
 <link rel="preconnect" href="https://gstatic.com" crossorigin>
-<link href="https://googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-:root{--void:#090d0a;--panel:#101711;--paper:#e6eee6;--muted:#7d8b7d;--wire:#26352a;--green:#42ff72;--mono:'JetBrains Mono',monospace;--display:'Oswald',sans-serif}
+/* Added common system fallback names in case the browser blocks Google Fonts locally */
+:root{
+    --void:#090d0a;
+    --panel:#101711;
+    --paper:#e6eee6;
+    --muted:#7d8b7d;
+    --wire:#26352a;
+    --green:#42ff72;
+    --mono:'JetBrains Mono', 'Courier New', Courier, monospace;
+    --display:'Oswald', 'Arial Narrow', Arial, sans-serif;
+}
+
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--void);color:var(--paper);font-family:var(--mono);line-height:1.6;min-height:100vh}
@@ -31,7 +42,7 @@ h1{font-family:var(--display);font-size:clamp(42px,8vw,80px);text-transform:uppe
 .terminal{background:#080d09;border:1px solid var(--wire);padding:20px;margin-bottom:45px;color:#8dff9f;box-shadow:0 0 30px rgba(66,255,114,.04)}
 .terminal span{color:var(--green)}
 
-/* Interactive Embedded Poll Layout */
+/* Themed Container for the Live Dynamic Image */
 .poll-section {
     margin-bottom: 45px;
 }
@@ -43,27 +54,53 @@ h1{font-family:var(--display);font-size:clamp(42px,8vw,80px);text-transform:uppe
     margin-bottom: 15px;
     letter-spacing: .05em;
 }
-.poll-frame-container {
+.poll-wrapper {
     background: var(--panel);
     border: 1px solid var(--wire);
-    padding: 20px;
+    padding: 30px;
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
-    position: relative;
     border-radius: 4px;
+    text-align: center;
     transition: border-color 0.25s ease;
 }
-.poll-frame-container:hover {
+.poll-wrapper:hover {
     border-color: var(--green);
     box-shadow: 0 0 15px rgba(66,255,114,.05);
 }
-/* This forces the embedded WakaTime frame to look clean on both desktop and mobile layouts */
-.poll-frame-container iframe {
-    width: 100%;
-    height: 520px; /* Default height suitable for WakaTime options and graphs */
-    border: none;
-    background: #ffffff; /* WakaTime uses a clean light background for form rendering */
+.poll-link-box {
     display: block;
-    border-radius: 2px;
+    background: #080d09;
+    border: 1px solid var(--wire);
+    padding: 12px;
+    margin-bottom: 24px;
+    transition: 0.25s ease;
+}
+.poll-link-box:hover {
+    border-color: var(--green);
+}
+.poll-link-box img {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+    vertical-align: middle;
+}
+.action-btn {
+    display: inline-block;
+    background: transparent;
+    color: var(--green);
+    border: 1px solid var(--green);
+    font-family: var(--mono);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+.action-btn:hover {
+    background: var(--green);
+    color: var(--void);
+    box-shadow: 0 0 15px rgba(66,255,114, 0.3);
 }
 
 footer{margin-top:60px;padding-top:25px;border-top:1px solid var(--wire);color:var(--muted);font-size:11px}
@@ -71,7 +108,6 @@ footer{margin-top:60px;padding-top:25px;border-top:1px solid var(--wire);color:v
     .nav{align-items:flex-start}
     .brand{font-size:17px}
     .brand img{width:38px;height:38px}
-    .poll-frame-container iframe { height: 600px; } /* Gives a bit more height scrolling room on narrow screens */
 }
 </style>
 </head>
@@ -85,20 +121,22 @@ footer{margin-top:60px;padding-top:25px;border-top:1px solid var(--wire);color:v
 <main>
 <div class="label">// live.surveys</div>
 <h1>Survey</h1>
-<p class="intro">Cast your vote directly below. Your choices help shape our active development pipeline.</p>
-<div class="terminal"><div>&gt; mounting_interactive_stream()</div><div>&gt; frame_status: <span>CONNECTED</span></div><div>&gt; target: <span>WAKATIME_POLL_API</span></div><div>&gt;_</div></div>
+<p class="intro">View current stats below and vote to help shape our active development pipeline.</p>
+<div class="terminal"><div>&gt; pulling_live_poll_metrics()</div><div>&gt; render_mode: <span>DYNAMIC_IMAGE</span></div><div>&gt; status: <span>ACTIVE</span></div><div>&gt;_</div></div>
 
-<!-- Core Interactive Live Poll -->
+<!-- Safe & Complete Dynamic Image Interface -->
 <div class="poll-section">
     <h2>// Active Poll Interface</h2>
-    <div class="poll-frame-container">
-        <!-- The live interactive iFrame that lets people interact without leaving your app -->
-        <iframe 
-            src="https://wakatime.com" 
-            title="WakaTime Live Poll Dashboard"
-            loading="lazy"
-            allow="cross-origin-isolated">
-        </iframe>
+    <div class="poll-wrapper">
+        <a class="poll-link-box" href="https://wakatime.com" target="_blank" rel="noopener noreferrer">
+            <!-- This renders the actual, live updating progress chart safely -->
+            <img src="https://wakatime.com.png" alt="WakaTime Live Poll Dashboard">
+        </a>
+        
+        <!-- Clean interactive launch action key -->
+        <a class="action-btn" href="https://wakatime.com" target="_blank" rel="noopener noreferrer">
+            Open Interactive Survey Box →
+        </a>
     </div>
 </div>
 

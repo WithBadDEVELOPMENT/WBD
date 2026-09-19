@@ -8,35 +8,37 @@
 @import url('https://googleapis.com');
 :root{--void:#090d0a;--panel:#101711;--paper:#e6eee6;--muted:#7d8b7d;--wire:#26352a;--green:#42ff72;--mono:'JetBrains Mono',monospace;--display:'Oswald',sans-serif}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--void);color:var(--paper);font-family:var(--mono);line-height:1.5;min-height:100vh}
-body:before{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(rgba(66,255,114,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(66,255,114,.02) 1px,transparent 1px);background-size:40px 40px}
-header{border-bottom:1px solid var(--wire);background:rgba(9,13,10,.92);backdrop-filter:blur(8px);position:sticky;top:0;z-index:10}
-.nav{max-width:1080px;margin:auto;padding:12px 6vw;display:flex;justify-content:space-between;align-items:center}
-.brand{font-family:var(--display);font-size:18px;font-weight:700;display:flex;align-items:center;gap:10px}
-.brand img{width:36px;height:36px;object-fit:cover;border:1px solid var(--wire)}
-.back{color:var(--green);font-size:11px;text-transform:uppercase;letter-spacing:.1em;border:1px solid var(--green);padding:5px 10px;transition:.2s}
-.back:hover{background:var(--green);color:var(--void);box-shadow:0 0 15px rgba(66,255,114,.2)}
-main{max-width:800px;margin:auto;padding:50px 6vw}
-.label{color:var(--green);font-size:11px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
-h1{font-family:var(--display);font-size:clamp(36px,6vw,64px);text-transform:uppercase;line-height:1;margin-bottom:12px}
-.intro{color:#aebaae;font-size:13px;margin-bottom:30px}
-.terminal{background:#080d09;border:1px solid var(--wire);padding:14px;margin-bottom:30px;color:#8dff9f;font-size:13px}
+html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--paper);font-family:var(--mono);line-height:1.6;min-height:100vh}
+body:before{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(rgba(66,255,114,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(66,255,114,.025) 1px,transparent 1px);background-size:42px 42px}
+a{color:inherit;text-decoration:none}
+header{border-bottom:1px solid var(--wire);background:rgba(9,13,10,.92);backdrop-filter:blur(10px);position:sticky;top:0;z-index:10}
+.nav{max-width:1080px;margin:auto;padding:16px 6vw;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.brand{font-family:var(--display);font-size:20px;font-weight:700;display:flex;align-items:center;gap:12px}
+.brand img{width:44px;height:44px;object-fit:cover;border:1px solid var(--wire)}
+.back{color:var(--green);font-size:12px;text-transform:uppercase;letter-spacing:.12em;border:1px solid var(--green);padding:7px 11px;transition:.25s}
+.back:hover{background:var(--green);color:var(--void);box-shadow:0 0 20px rgba(66,255,114,.2)}
+main{max-width:900px;margin:auto;padding:80px 6vw}
+.label{color:var(--green);font-size:11px;letter-spacing:.25em;text-transform:uppercase;margin-bottom:14px}
+h1{font-family:var(--display);font-size:clamp(42px,8vw,80px);text-transform:uppercase;line-height:1;margin-bottom:20px}
+.intro{color:#aebaae;max-width:650px;font-size:14px;margin-bottom:45px}
+.terminal{background:#080d09;border:1px solid var(--wire);padding:20px;margin-bottom:35px;color:#8dff9f;box-shadow:0 0 30px rgba(66,255,114,.04)}
 .terminal span{color:var(--green)}
-.survey-card{background:var(--panel);border:1px solid var(--wire);padding:18px;margin-bottom:14px}
+.survey-card{background:var(--panel);border:1px solid var(--wire);padding:24px;margin-bottom:18px;transition:0.3s}
 .survey-card:hover{border-color:var(--green)}
-.question-title{font-family:var(--display);text-transform:uppercase;font-size:19px;color:var(--green);margin-bottom:12px}
-.options-list{display:flex;flex-direction:column;gap:8px}
-.option-label{display:flex;align-items:center;gap:10px;background:rgba(9,13,10,0.5);border:1px solid var(--wire);padding:10px 14px;cursor:pointer;font-size:12px}
+.question-title{font-family:var(--display);text-transform:uppercase;font-size:21px;color:var(--green);margin-bottom:15px}
+.options-list{display:flex;flex-direction:column;gap:10px}
+.option-label{display:flex;align-items:center;gap:12px;background:rgba(9,13,10,0.5);border:1px solid var(--wire);padding:12px 16px;cursor:pointer;font-size:13px;transition:0.2s ease}
 .option-label:hover{border-color:var(--green)}
-.option-label input[type="radio"]{appearance:none;width:12px;height:12px;border:1px solid var(--wire);display:grid;place-content:center}
-.option-label input[type="radio"]::before{content:"";width:6px;height:6px;transform:scale(0);background:var(--green);box-shadow:0 0 6px var(--green);transition:0.1s transform}
+.option-label input[type="radio"]{appearance:none;width:14px;height:14px;border:1px solid var(--wire);background:transparent;cursor:pointer;display:grid;place-content:center;transition:0.2s ease}
+.option-label input[type="radio"]::before{content:"";width:6px;height:6px;transform:scale(0);transition:0.1s transform ease;background:var(--green);box-shadow:0 0 8px var(--green)}
 .option-label input[type="radio"]:checked{border-color:var(--green)}
 .option-label input[type="radio"]:checked::before{transform:scale(1)}
-.submit-container{text-align:right;margin-top:20px}
-.submit-btn{background:transparent;color:var(--green);border:1px solid var(--green);font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;padding:10px 20px;cursor:pointer;transition:.2s}
-.submit-btn:hover{background:var(--green);color:var(--void);box-shadow:0 0 15px rgba(66,255,114,.2)}
-footer{margin-top:45px;padding-top:20px;border-top:1px solid var(--wire);color:var(--muted);font-size:10px}
-@media(max-width:650px){.brand{font-size:15px}.brand img{width:32px;height:32px}}
+.submit-container{text-align:right;margin-top:25px}
+.submit-btn{background:transparent;color:var(--green);border:1px solid var(--green);font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.12em;padding:12px 24px;cursor:pointer;transition:.25s}
+.submit-btn:hover{background:var(--green);color:var(--void);box-shadow:0 0 20px rgba(66,255,114,.2)}
+footer{margin-top:60px;padding-top:25px;border-top:1px solid var(--wire);color:var(--muted);font-size:11px}
+@media(max-width:650px){.nav{align-items:flex-start}.brand{font-size:17px}.brand img{width:38px;height:38px}}
 </style>
 <script type="text/javascript" src="https://jsdelivr.net"></script>
 </head>
@@ -50,15 +52,17 @@ footer{margin-top:45px;padding-top:20px;border-top:1px solid var(--wire);color:v
 <main>
 <div class="label" id="survey-label">// initializing.stream</div>
 <h1 id="survey-title">Loading Survey</h1>
-<p class="intro" id="survey-intro">Connecting with matrix files...</p>
+<p class="intro" id="survey-intro">Connecting with matrix document configuration files...</p>
 <div class="terminal">
+    <div>&gt; initialize_runtime_stream()</div>
     <div>&gt; config_file: <span id="terminal-file">SEARCHING_SURVEY_TXT</span></div>
-    <div>&gt; runtime_status: <span id="terminal-status">PROCESSING</span></div>
+    <div>&gt; status: <span>PROCESSING</span></div>
+    <div>&gt;_</div>
 </div>
 <form id="dynamic-survey-form">
     <div id="survey-container"></div>
     <div class="submit-container" id="submit-box" style="display: none;">
-        <button type="submit" class="submit-btn">Transmit Telemetry →</button>
+        <button type="submit" class="submit-btn">Transmit Survey Telemetry →</button>
     </div>
 </form>
 <footer>WITH BAD DEVELOPMENT · SURVEY CENTER</footer>
@@ -71,27 +75,24 @@ document.addEventListener("DOMContentLoaded", function() {
     fetch("survey.txt")
         .then(res => { if (!res.ok) throw new Error(); return res.text(); })
         .then(text => {
-            document.getElementById("terminal-file").innerText = "CONNECTED";
-            document.getElementById("terminal-status").innerText = "READY";
+            document.getElementById("terminal-file").innerText = "CONNECTED_SUCCESS";
             document.getElementById("survey-label").innerText = "// live.surveys";
-            
             const lines = text.split('\n'), container = document.getElementById("survey-container");
             let list = null, qCount = 0;
 
             lines.forEach(line => {
                 const tr = line.trim(); if (!tr) return;
-                if (tr.startsWith("[TITLE]")) document.getElementById("survey-title").innerText = tr.replace("[TITLE]","").trim();
-                else if (tr.startsWith("[INTRO]")) document.getElementById("survey-intro").innerText = tr.replace("[INTRO]","").trim();
+                if (tr.startsWith("[TITLE]")) document.getElementById("survey-title").innerText = tr.replace("[TITLE]", "").trim();
+                else if (tr.startsWith("[INTRO]")) document.getElementById("survey-intro").innerText = tr.replace("[INTRO]", "").trim();
                 else if (tr.startsWith("[QUESTION]")) {
                     qCount++;
                     const card = document.createElement("div"); card.className = "survey-card";
-                    const h2 = document.createElement("h2"); h2.className = "question-title"; h2.innerText = `0${qCount}. ${tr.replace("[QUESTION]","").trim()}`;
+                    const h2 = document.createElement("h2"); h2.className = "question-title"; h2.innerText = `0${qCount}. ${tr.replace("[QUESTION]", "").trim()}`;
                     card.appendChild(h2);
                     list = document.createElement("div"); list.className = "options-list";
                     card.appendChild(list); container.appendChild(card);
-                } 
-                else if (tr.startsWith("[OPTION]") && list) {
-                    const opt = tr.replace("[OPTION]","").trim(), id = `q_${qCount}_${Math.random().toString(36).substr(2,4)}`;
+                } else if (tr.startsWith("[OPTION]") && list) {
+                    const opt = tr.replace("[OPTION]", "").trim(), id = `q_${qCount}_opt_${Math.random().toString(36).substr(2, 5)}`;
                     const lbl = document.createElement("label"); lbl.className = "option-label"; lbl.setAttribute("for", id);
                     const rad = document.createElement("input"); rad.type = "radio"; rad.name = `Question 0${qCount}`; rad.id = id; rad.value = opt; rad.required = true;
                     const sp = document.createElement("span"); sp.innerText = opt;
@@ -101,22 +102,20 @@ document.addEventListener("DOMContentLoaded", function() {
             if (qCount > 0) document.getElementById("submit-box").style.display = "block";
         })
         .catch(() => {
-            document.getElementById("terminal-file").innerText = "FAIL";
-            document.getElementById("terminal-status").innerText = "OFFLINE";
+            document.getElementById("terminal-file").innerText = "ERROR_FAILED_FETCH";
             document.getElementById("survey-title").innerText = "Configuration Error";
         });
 
     document.getElementById("dynamic-survey-form").addEventListener("submit", function(e) {
         e.preventDefault(); const btn = this.querySelector(".submit-btn");
-        btn.innerText = "TRANSMITTING..."; btn.disabled = true;
+        btn.innerText = "TRANSMITTING DATA..."; btn.disabled = true;
+        let payload = "";
+        new FormData(this).forEach((val, key) => { payload += `${key}: ${val}\n`; });
 
-        let dataStr = "";
-        new FormData(this).forEach((val, key) => { dataStr += `${key}: ${val}\n`; });
-
-        emailjs.send(S_ID, T_ID, { survey_data: dataStr })
-            .then(() => { alert("Telemetry transmitted successfully!"); this.reset(); })
-            .catch(() => { alert("Transmission failed."); })
-            .finally(() => { btn.innerText = "Transmit Telemetry →"; btn.disabled = false; });
+        emailjs.send(S_ID, T_ID, { survey_data: payload })
+            .then(() => { alert("Telemetry logs successfully transmitted directly to the development inbox!"); this.reset(); })
+            .catch(() => { alert("Transmission failed. Verify configurations."); })
+            .finally(() => { btn.innerText = "Transmit Survey Telemetry →"; btn.disabled = false; });
     });
 });
 </script>

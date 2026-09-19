@@ -3,16 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Survey — With Bad DEVELOPMENT</title>
+<title>Survey Center — With Bad DEVELOPMENT</title>
 <link rel="icon" type="image/jpeg" href="../channels4_profile (1).jpg">
 
-<!-- Enhanced Font Loading Strategy: Standard link paths plus direct system fallbacks inside the CSS -->
+<!-- Google Fonts Loaded Directly via HTML Links for Sandbox Safety Net -->
 <link rel="preconnect" href="https://googleapis.com">
 <link rel="preconnect" href="https://gstatic.com" crossorigin>
-<link href="https://googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* Added common system fallback names in case the browser blocks Google Fonts locally */
 :root{
     --void:#090d0a;
     --panel:#101711;
@@ -20,10 +19,9 @@
     --muted:#7d8b7d;
     --wire:#26352a;
     --green:#42ff72;
-    --mono:'JetBrains Mono', 'Courier New', Courier, monospace;
-    --display:'Oswald', 'Arial Narrow', Arial, sans-serif;
+    --mono:'JetBrains Mono', 'Consolas', 'Fira Code', 'Courier New', monospace;
+    --display:'Oswald', 'Impact', 'Arial Narrow', 'Arial', sans-serif;
 }
-
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--void);color:var(--paper);font-family:var(--mono);line-height:1.6;min-height:100vh}
@@ -42,50 +40,80 @@ h1{font-family:var(--display);font-size:clamp(42px,8vw,80px);text-transform:uppe
 .terminal{background:#080d09;border:1px solid var(--wire);padding:20px;margin-bottom:45px;color:#8dff9f;box-shadow:0 0 30px rgba(66,255,114,.04)}
 .terminal span{color:var(--green)}
 
-/* Themed Container for the Live Dynamic Image */
-.poll-section {
-    margin-bottom: 45px;
-}
-.poll-section h2 {
-    font-family: var(--display);
-    text-transform: uppercase;
-    font-size: 24px;
-    color: var(--green);
-    margin-bottom: 15px;
-    letter-spacing: .05em;
-}
-.poll-wrapper {
+/* Dynamic Survey UI Elements */
+.survey-card {
     background: var(--panel);
     border: 1px solid var(--wire);
     padding: 30px;
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+    margin-bottom: 25px;
     border-radius: 4px;
-    text-align: center;
+    box-shadow: 0 0 25px rgba(0,0,0,0.2);
     transition: border-color 0.25s ease;
 }
-.poll-wrapper:hover {
+.survey-card:hover {
     border-color: var(--green);
-    box-shadow: 0 0 15px rgba(66,255,114,.05);
 }
-.poll-link-box {
-    display: block;
+.question-title {
+    font-family: var(--display);
+    text-transform: uppercase;
+    font-size: 22px;
+    color: var(--green);
+    margin-bottom: 20px;
+    letter-spacing: 0.05em;
+}
+.options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.option-label {
+    display: flex;
+    align-items: center;
+    gap: 15px;
     background: #080d09;
     border: 1px solid var(--wire);
-    padding: 12px;
-    margin-bottom: 24px;
-    transition: 0.25s ease;
+    padding: 14px 20px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: 0.2s ease;
 }
-.poll-link-box:hover {
+.option-label:hover {
+    border-color: var(--green);
+    background: rgba(66,255,114, 0.02);
+}
+/* Custom terminal styled radio selections */
+.option-label input[type="radio"] {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border: 1px solid var(--wire);
+    background: transparent;
+    cursor: pointer;
+    display: grid;
+    place-content: center;
+    transition: 0.2s ease;
+}
+.option-label input[type="radio"]::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    transform: scale(0);
+    transition: 0.15s transform ease-in-out;
+    background: var(--green);
+    box-shadow: 0 0 8px var(--green);
+}
+.option-label input[type="radio"]:checked {
     border-color: var(--green);
 }
-.poll-link-box img {
-    max-width: 100%;
-    height: auto;
-    display: inline-block;
-    vertical-align: middle;
+.option-label input[type="radio"]:checked::before {
+    transform: scale(1);
 }
-.action-btn {
-    display: inline-block;
+
+.submit-container {
+    text-align: right;
+    margin-top: 30px;
+}
+.submit-btn {
     background: transparent;
     color: var(--green);
     border: 1px solid var(--green);
@@ -93,22 +121,18 @@ h1{font-family:var(--display);font-size:clamp(42px,8vw,80px);text-transform:uppe
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    padding: 12px 24px;
+    padding: 14px 32px;
     cursor: pointer;
     transition: 0.25s ease;
 }
-.action-btn:hover {
+.submit-btn:hover {
     background: var(--green);
     color: var(--void);
-    box-shadow: 0 0 15px rgba(66,255,114, 0.3);
+    box-shadow: 0 0 20px rgba(66,255,114, 0.3);
 }
 
 footer{margin-top:60px;padding-top:25px;border-top:1px solid var(--wire);color:var(--muted);font-size:11px}
-@media(max-width:650px){
-    .nav{align-items:flex-start}
-    .brand{font-size:17px}
-    .brand img{width:38px;height:38px}
-}
+@media(max-width:650px){parent.nav{align-items:flex-start}.brand{font-size:17px}.brand img{width:38px;height:38px}}
 </style>
 </head>
 <body>
@@ -119,28 +143,118 @@ footer{margin-top:60px;padding-top:25px;border-top:1px solid var(--wire);color:v
 </div>
 </header>
 <main>
-<div class="label">// live.surveys</div>
-<h1>Survey</h1>
-<p class="intro">View current stats below and vote to help shape our active development pipeline.</p>
-<div class="terminal"><div>&gt; pulling_live_poll_metrics()</div><div>&gt; render_mode: <span>DYNAMIC_IMAGE</span></div><div>&gt; status: <span>ACTIVE</span></div><div>&gt;_</div></div>
+<div class="label" id="survey-label">// initializing.stream</div>
+<h1 id="survey-title">Loading Survey</h1>
+<p class="intro" id="survey-intro">Fetching latest questions directly from active configuration matrix file...</p>
 
-<!-- Safe & Complete Dynamic Image Interface -->
-<div class="poll-section">
-    <h2>// Active Poll Interface</h2>
-    <div class="poll-wrapper">
-        <a class="poll-link-box" href="https://wakatime.com" target="_blank" rel="noopener noreferrer">
-            <!-- This renders the actual, live updating progress chart safely -->
-            <img src="https://wakatime.com.png" alt="WakaTime Live Poll Dashboard">
-        </a>
-        
-        <!-- Clean interactive launch action key -->
-        <a class="action-btn" href="https://wakatime.com" target="_blank" rel="noopener noreferrer">
-            Open Interactive Survey Box →
-        </a>
-    </div>
+<div class="terminal">
+    <div>&gt; initialize_runtime_stream()</div>
+    <div>&gt; config_file: <span id="terminal-file">SEARCHING_SURVEY_TXT</span></div>
+    <div>&gt; runtime_status: <span id="terminal-status">PROCESSING</span></div>
+    <div>&gt;_</div>
 </div>
+
+<form id="dynamic-survey-form">
+    <div id="survey-container"></div>
+    <div class="submit-container" id="submit-box" style="display: none;">
+        <button type="submit" class="submit-btn">Transmit Survey Telemetry →</button>
+    </div>
+</form>
 
 <footer>WITH BAD DEVELOPMENT · SURVEY CENTER</footer>
 </main>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const sourceFile = "survey.txt";
+
+    fetch(sourceFile)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Could not find survey configuration file.");
+            }
+            return response.text();
+        })
+        .then(text => {
+            document.getElementById("terminal-file").innerText = "CONNECTED_SUCCESS";
+            document.getElementById("terminal-status").innerText = "READY";
+            document.getElementById("survey-label").innerText = "// live.surveys";
+
+            const lines = text.split('\n');
+            const container = document.getElementById("survey-container");
+            
+            let optionsListEl = null;
+            let questionCount = 0;
+
+            lines.forEach(line => {
+                const trimmed = line.trim();
+                if (!trimmed) return;
+
+                if (trimmed.startsWith("[TITLE]")) {
+                    document.getElementById("survey-title").innerText = trimmed.replace("[TITLE]", "").trim();
+                } 
+                else if (trimmed.startsWith("[INTRO]")) {
+                    document.getElementById("survey-intro").innerText = trimmed.replace("[INTRO]", "").trim();
+                } 
+                else if (trimmed.startsWith("[QUESTION]")) {
+                    questionCount++;
+                    const questionText = trimmed.replace("[QUESTION]", "").trim();
+
+                    const card = document.createElement("div");
+                    card.className = "survey-card";
+
+                    const h2 = document.createElement("h2");
+                    h2.className = "question-title";
+                    h2.innerText = `0${questionCount}. ${questionText}`;
+                    card.appendChild(h2);
+
+                    optionsListEl = document.createElement("div");
+                    optionsListEl.className = "options-list";
+                    card.appendChild(optionsListEl);
+
+                    container.appendChild(card);
+                } 
+                else if (trimmed.startsWith("[OPTION]") && optionsListEl) {
+                    const optionText = trimmed.replace("[OPTION]", "").trim();
+                    const optionId = `q_${questionCount}_opt_${Math.random().toString(36).substr(2, 5)}`;
+
+                    const label = document.createElement("label");
+                    label.className = "option-label";
+                    label.setAttribute("for", optionId);
+
+                    const radio = document.createElement("input");
+                    radio.type = "radio";
+                    radio.name = `question_${questionCount}`;
+                    radio.id = optionId;
+                    radio.value = optionText;
+                    radio.required = true;
+
+                    const textSpan = document.createElement("span");
+                    textSpan.innerText = optionText;
+
+                    label.appendChild(radio);
+                    label.appendChild(textSpan);
+                    optionsListEl.appendChild(label);
+                }
+            });
+
+            if (questionCount > 0) {
+                document.getElementById("submit-box").style.display = "block";
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            document.getElementById("terminal-file").innerText = "ERROR_FAILED_FETCH";
+            document.getElementById("terminal-status").innerText = "OFFLINE";
+            document.getElementById("survey-title").innerText = "Configuration Error";
+            document.getElementById("survey-intro").innerText = "Failed to sync setup templates. Ensure survey.txt exists in your root folder layout.";
+        });
+
+    document.getElementById("dynamic-survey-form").addEventListener("submit", function(e) {
+        e.preventDefault();
+        alert("Telemetry logs submitted successfully! Connect this section to a backend handler to save user entries permanently.");
+    });
+});
+</script>
 </body>
 </html>

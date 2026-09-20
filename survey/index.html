@@ -50,18 +50,18 @@ footer{margin-top:60px;padding-top:25px;border-top:1px solid var(--wire);color:v
 </div>
 </header>
 <main>
-<div class="label" id="survey-label">// initializing.stream</div>
-<h1 id="survey-title">Loading Survey</h1>
-<p class="intro" id="survey-intro">Connecting with matrix document configuration files...</p>
+<div class="label" id="survey-label">// live.surveys</div>
+<h1 id="survey-title">Active Survey</h1>
+<p class="intro" id="survey-intro">Select your answers below to transmit telemetry logs directly to development.</p>
 <div class="terminal">
-    <div>&gt; initialize_runtime_stream()</div>
-    <div>&gt; config_file: <span id="terminal-file">SEARCHING_SURVEY_TXT</span></div>
-    <div>&gt; status: <span>PROCESSING</span></div>
+    <div>&gt; compile_runtime_stream()</div>
+    <div>&gt; server_status: <span>ONLINE</span></div>
+    <div>&gt; connection: <span>READY</span></div>
     <div>&gt;_</div>
 </div>
 <form id="dynamic-survey-form">
     <div id="survey-container"></div>
-    <div class="submit-container" id="submit-box" style="display: none;">
+    <div class="submit-container">
         <button type="submit" class="submit-btn">Transmit Survey Telemetry →</button>
     </div>
 </form>
@@ -69,53 +69,87 @@ footer{margin-top:60px;padding-top:25px;border-top:1px solid var(--wire);color:v
 </main>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
+    // Authenticated API credentials linked up safely
     const P_KEY = "sFXveD7WBHt19lRyP", S_ID = "service_survey", T_ID = "Survey_Response";
     emailjs.init({ publicKey: P_KEY });
 
-    fetch("survey.txt")
-        .then(res => { if (!res.ok) throw new Error(); return res.text(); })
-        .then(text => {
-            document.getElementById("terminal-file").innerText = "CONNECTED_SUCCESS";
-            document.getElementById("survey-label").innerText = "// live.surveys";
-            const lines = text.split('\n'), container = document.getElementById("survey-container");
-            let list = null, qCount = 0;
+    // ==========================================
+    // EASY CONFIG BOX: UPDATE YOUR SURVEY TEXT RIGHT HERE
+    // ==========================================
+    const surveyConfig = [
+        {
+            question: "Which feature should we build next?",
+            options: ["Multiplayer Matchmaking Engine", "Advanced Developer API Sandbox", "Modding & Extension Support Docs"]
+        },
+        {
+            question: "What is your preferred platform?",
+            options: ["PC / Desktop Native Launcher", "Web App Sandbox / GitHub Pages Embed", "Mobile Interface Optimization"]
+        }
+    ];
 
-            lines.forEach(line => {
-                const tr = line.trim(); if (!tr) return;
-                if (tr.startsWith("[TITLE]")) document.getElementById("survey-title").innerText = tr.replace("[TITLE]", "").trim();
-                else if (tr.startsWith("[INTRO]")) document.getElementById("survey-intro").innerText = tr.replace("[INTRO]", "").trim();
-                else if (tr.startsWith("[QUESTION]")) {
-                    qCount++;
-                    const card = document.createElement("div"); card.className = "survey-card";
-                    const h2 = document.createElement("h2"); h2.className = "question-title"; h2.innerText = `0${qCount}. ${tr.replace("[QUESTION]", "").trim()}`;
-                    card.appendChild(h2);
-                    list = document.createElement("div"); list.className = "options-list";
-                    card.appendChild(list); container.appendChild(card);
-                } else if (tr.startsWith("[OPTION]") && list) {
-                    const opt = tr.replace("[OPTION]", "").trim(), id = `q_${qCount}_opt_${Math.random().toString(36).substr(2, 5)}`;
-                    const lbl = document.createElement("label"); lbl.className = "option-label"; lbl.setAttribute("for", id);
-                    const rad = document.createElement("input"); rad.type = "radio"; rad.name = `Question 0${qCount}`; rad.id = id; rad.value = opt; rad.required = true;
-                    const sp = document.createElement("span"); sp.innerText = opt;
-                    lbl.appendChild(rad); lbl.appendChild(sp); list.appendChild(lbl);
-                }
-            });
-            if (qCount > 0) document.getElementById("submit-box").style.display = "block";
-        })
-        .catch(() => {
-            document.getElementById("terminal-file").innerText = "ERROR_FAILED_FETCH";
-            document.getElementById("survey-title").innerText = "Configuration Error";
+    // ==========================================
+    // RENDERING ENGINE (DO NOT TOUCH)
+    // ==========================================
+    const container = document.getElementById("survey-container");
+    surveyConfig.forEach((q, idx) => {
+        const qNum = idx + 1;
+        const card = document.createElement("div");
+        card.className = "survey-card";
+
+        const h2 = document.createElement("h2");
+        h2.className = "question-title";
+        h2.innerText = `0${qNum}. ${q.question}`;
+        card.appendChild(h2);
+
+        const list = document.createElement("div");
+        list.className = "options-list";
+
+        q.options.forEach(opt => {
+            const optId = `q_${qNum}_opt_${Math.random().toString(36).substr(2, 4)}`;
+            const lbl = document.createElement("label");
+            lbl.className = "option-label";
+            lbl.setAttribute("for", optId);
+
+            const rad = document.createElement("input");
+            rad.type = "radio";
+            rad.name = `Question 0${qNum}`;
+            rad.id = optId;
+            rad.value = opt;
+            rad.required = true;
+
+            const sp = document.createElement("span");
+            sp.innerText = opt;
+
+            lbl.appendChild(rad);
+            lbl.appendChild(sp);
+            list.appendChild(lbl);
         });
 
+        card.appendChild(list);
+        container.appendChild(card);
+    });
+
     document.getElementById("dynamic-survey-form").addEventListener("submit", function(e) {
-        e.preventDefault(); const btn = this.querySelector(".submit-btn");
-        btn.innerText = "TRANSMITTING DATA..."; btn.disabled = true;
+        e.preventDefault(); 
+        const btn = this.querySelector(".submit-btn");
+        btn.innerText = "TRANSMITTING DATA..."; 
+        btn.disabled = true;
+
         let payload = "";
         new FormData(this).forEach((val, key) => { payload += `${key}: ${val}\n`; });
 
         emailjs.send(S_ID, T_ID, { survey_data: payload })
-            .then(() => { alert("Telemetry logs successfully transmitted directly to the development inbox!"); this.reset(); })
-            .catch(() => { alert("Transmission failed. Verify configurations."); })
-            .finally(() => { btn.innerText = "Transmit Survey Telemetry →"; btn.disabled = false; });
+            .then(() => { 
+                alert("Telemetry logs successfully transmitted directly to the development inbox!"); 
+                this.reset(); 
+            })
+            .catch(() => { 
+                alert("Transmission failed. Verify configurations."); 
+            })
+            .finally(() => { 
+                btn.innerText = "Transmit Survey Telemetry →"; 
+                btn.disabled = false; 
+            });
     });
 });
 </script>

@@ -1,81 +1,1258 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Survey — WBD</title>
-<link rel="icon" type="image/jpeg" href="../channels4_profile (1).jpg">
-<style>
-@import url('https://googleapis.com');
-:root{--void:#090d0a;--panel:#101711;--paper:#e6eee6;--muted:#7d8b7d;--wire:#26352a;--green:#42ff72;--mono:'JetBrains Mono',monospace;--display:'Oswald',sans-serif}
-*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
-body{background:var(--void);color:var(--paper);font-family:var(--mono);line-height:1.6;min-height:100vh}
-body:before{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(rgba(66,255,114,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(66,255,114,.025) 1px,transparent 1px);background-size:42px 42px}
-a{color:inherit;text-decoration:none}header{border-bottom:1px solid var(--wire);background:rgba(9,13,10,.92);backdrop-filter:blur(10px);position:sticky;top:0;z-index:10}
-.nav{max-width:1080px;margin:auto;padding:16px 6vw;display:flex;justify-content:space-between;align-items:center;gap:20px}
-.brand{font-family:var(--display);font-size:20px;font-weight:700;display:flex;align-items:center;gap:12px}
-.brand img{width:44px;height:44px;object-fit:cover;border:1px solid var(--wire)}
-.back{color:var(--green);font-size:12px;text-transform:uppercase;letter-spacing:.12em;border:1px solid var(--green);padding:7px 11px;transition:.25s}
-.back:hover{background:var(--green);color:var(--void);box-shadow:0 0 20px rgba(66,255,114,.2)}
-main{max-width:900px;margin:auto;padding:80px 6vw}.label{color:var(--green);font-size:11px;letter-spacing:.25em;text-transform:uppercase;margin-bottom:14px}
-h1{font-family:var(--display);font-size:clamp(42px,8vw,80px);text-transform:uppercase;line-height:1;margin-bottom:20px}
-.intro{color:#aebaae;max-width:650px;font-size:14px;margin-bottom:45px}
-.terminal{background:#080d09;border:1px solid var(--wire);padding:20px;margin-bottom:35px;color:#8dff9f;box-shadow:0 0 30px rgba(66,255,114,.04)}
-.terminal span{color:var(--green)}.survey-card{background:var(--panel);border:1px solid var(--wire);padding:24px;margin-bottom:18px;transition:0.3s}
-.survey-card:hover{border-color:var(--green)}.question-title{font-family:var(--display);text-transform:uppercase;font-size:21px;color:var(--green);margin-bottom:15px}
-.options-list{display:flex;flex-direction:column;gap:10px}
-.option-label{display:flex;align-items:center;gap:12px;background:rgba(9,13,10,0.5);border:1px solid var(--wire);padding:12px 16px;cursor:pointer;font-size:13px;transition:0.2s ease}
-.option-label:hover{border-color:var(--green)}
-.option-label input[type="radio"]{appearance:none;width:14px;height:14px;border:1px solid var(--wire);background:transparent;cursor:pointer;display:grid;place-content:center;transition:0.2s ease}
-.option-label input[type="radio"]::before{content:"";width:6px;height:6px;transform:scale(0);transition:0.1s transform ease;background:var(--green);box-shadow:0 0 8px var(--green)}
-.option-label input[type="radio"]:checked{border-color:var(--green)}.option-label input[type="radio"]:checked::before{transform:scale(1)}
-.submit-container{text-align:right;margin-top:25px}
-.submit-btn{background:transparent;color:var(--green);border:1px solid var(--green);font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.12em;padding:12px 24px;cursor:pointer;transition:.25s}
-.submit-btn:hover{background:var(--green);color:var(--void);box-shadow:0 0 20px rgba(66,255,114,.2)}
-footer{margin-top:60px;padding-top:25px;border-top:1px solid var(--wire);color:var(--muted);font-size:11px}
-@media(max-width:650px){.nav{align-items:flex-start}.brand{font-size:17px}.brand img{width:38px;height:38px}}
-</style>
-<script async type="text/javascript" src="https://jsdelivr.net"></script>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>Survey — WBD</title>
+
+  <link
+    rel="icon"
+    type="image/jpeg"
+    href="../channels4_profile (1).jpg"
+  >
+
+  <!-- Google Fonts -->
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Oswald:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- EmailJS -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+    defer
+  ></script>
+
+  <style>
+    :root {
+      --void: #090d0a;
+      --panel: #101711;
+      --paper: #e6eee6;
+      --muted: #7d8b7d;
+      --wire: #26352a;
+      --green: #42ff72;
+      --green-dark: #1d9b3d;
+
+      --mono: "JetBrains Mono", monospace;
+      --display: "Oswald", sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--void);
+      color: var(--paper);
+      font-family: var(--mono);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+
+      background:
+        linear-gradient(
+          rgba(66, 255, 114, 0.025) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(66, 255, 114, 0.025) 1px,
+          transparent 1px
+        );
+
+      background-size: 42px 42px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      border-bottom: 1px solid var(--wire);
+      background: rgba(9, 13, 10, 0.92);
+      backdrop-filter: blur(10px);
+
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav {
+      max-width: 1080px;
+      margin: 0 auto;
+
+      padding: 16px 6vw;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand {
+      font-family: var(--display);
+      font-size: 20px;
+      font-weight: 700;
+
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      min-width: 0;
+    }
+
+    .brand img {
+      width: 44px;
+      height: 44px;
+
+      object-fit: cover;
+
+      border: 1px solid var(--wire);
+
+      flex-shrink: 0;
+    }
+
+    .brand span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .back {
+      color: var(--green);
+
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+
+      border: 1px solid var(--green);
+
+      padding: 7px 11px;
+
+      transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        box-shadow 0.25s ease;
+
+      flex-shrink: 0;
+    }
+
+    .back:hover {
+      background: var(--green);
+      color: var(--void);
+
+      box-shadow:
+        0 0 20px rgba(66, 255, 114, 0.2);
+    }
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+
+      padding: 80px 6vw;
+    }
+
+    .label {
+      color: var(--green);
+
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-family: var(--display);
+
+      font-size: clamp(42px, 8vw, 80px);
+      text-transform: uppercase;
+      line-height: 1;
+
+      margin-bottom: 20px;
+    }
+
+    .intro {
+      color: #aebaae;
+
+      max-width: 650px;
+
+      font-size: 14px;
+
+      margin-bottom: 45px;
+    }
+
+    /* =========================
+       TERMINAL
+    ========================= */
+
+    .terminal {
+      background: #080d09;
+
+      border: 1px solid var(--wire);
+
+      padding: 20px;
+
+      margin-bottom: 35px;
+
+      color: #8dff9f;
+
+      box-shadow:
+        0 0 30px rgba(66, 255, 114, 0.04);
+
+      font-size: 13px;
+    }
+
+    .terminal span {
+      color: var(--green);
+    }
+
+    #terminal-status {
+      transition: color 0.2s ease;
+    }
+
+    /* =========================
+       SURVEY
+    ========================= */
+
+    .survey-card {
+      background: var(--panel);
+
+      border: 1px solid var(--wire);
+
+      padding: 24px;
+
+      margin-bottom: 18px;
+
+      transition:
+        border-color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+    .survey-card:hover {
+      border-color: var(--green);
+
+      box-shadow:
+        0 0 20px rgba(66, 255, 114, 0.035);
+    }
+
+    .question-title {
+      font-family: var(--display);
+
+      text-transform: uppercase;
+
+      font-size: 21px;
+
+      color: var(--green);
+
+      margin-bottom: 15px;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      background: rgba(9, 13, 10, 0.5);
+
+      border: 1px solid var(--wire);
+
+      padding: 12px 16px;
+
+      cursor: pointer;
+
+      font-size: 13px;
+
+      transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .option-label:hover {
+      border-color: var(--green);
+
+      background: rgba(66, 255, 114, 0.025);
+    }
+
+    .option-label:has(input:checked) {
+      border-color: var(--green);
+
+      background: rgba(66, 255, 114, 0.045);
+    }
+
+    .option-label input[type="radio"] {
+      appearance: none;
+
+      width: 14px;
+      height: 14px;
+
+      border: 1px solid var(--wire);
+
+      background: transparent;
+
+      cursor: pointer;
+
+      display: grid;
+      place-content: center;
+
+      flex-shrink: 0;
+
+      transition: 0.2s ease;
+    }
+
+    .option-label input[type="radio"]::before {
+      content: "";
+
+      width: 6px;
+      height: 6px;
+
+      transform: scale(0);
+
+      transition: 0.1s transform ease;
+
+      background: var(--green);
+
+      box-shadow:
+        0 0 8px var(--green);
+    }
+
+    .option-label input[type="radio"]:checked {
+      border-color: var(--green);
+    }
+
+    .option-label input[type="radio"]:checked::before {
+      transform: scale(1);
+    }
+
+    /* =========================
+       SUBMIT
+    ========================= */
+
+    .submit-container {
+      text-align: right;
+
+      margin-top: 25px;
+    }
+
+    .submit-btn {
+      background: transparent;
+
+      color: var(--green);
+
+      border: 1px solid var(--green);
+
+      font-family: var(--mono);
+
+      font-size: 12px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.12em;
+
+      padding: 12px 24px;
+
+      cursor: pointer;
+
+      transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        box-shadow 0.25s ease,
+        opacity 0.25s ease;
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      background: var(--green);
+
+      color: var(--void);
+
+      box-shadow:
+        0 0 20px rgba(66, 255, 114, 0.2);
+    }
+
+    .submit-btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    /* =========================
+       STATUS
+    ========================= */
+
+    .form-status {
+      display: none;
+
+      margin-top: 18px;
+
+      padding: 14px 16px;
+
+      border: 1px solid var(--wire);
+
+      font-size: 12px;
+    }
+
+    .form-status.success {
+      display: block;
+
+      color: var(--green);
+
+      border-color: var(--green);
+
+      background: rgba(66, 255, 114, 0.04);
+    }
+
+    .form-status.error {
+      display: block;
+
+      color: #ff7272;
+
+      border-color: #ff7272;
+
+      background: rgba(255, 70, 70, 0.04);
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      margin-top: 60px;
+
+      padding-top: 25px;
+
+      border-top: 1px solid var(--wire);
+
+      color: var(--muted);
+
+      font-size: 11px;
+    }
+
+    /* =========================
+       LOADING
+    ========================= */
+
+    .loading {
+      color: var(--muted);
+      font-size: 12px;
+
+      padding: 20px 0;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 650px) {
+      .nav {
+        align-items: flex-start;
+
+        padding-top: 12px;
+        padding-bottom: 12px;
+      }
+
+      .brand {
+        font-size: 17px;
+      }
+
+      .brand img {
+        width: 38px;
+        height: 38px;
+      }
+
+      .back {
+        font-size: 10px;
+        padding: 6px 8px;
+      }
+
+      main {
+        padding-top: 55px;
+      }
+
+      .survey-card {
+        padding: 18px;
+      }
+
+      .question-title {
+        font-size: 18px;
+      }
+
+      .submit-container {
+        text-align: left;
+      }
+
+      .submit-btn {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 460px) {
+      .brand span {
+        max-width: 150px;
+      }
+
+      h1 {
+        font-size: 42px;
+      }
+
+      .intro {
+        font-size: 13px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<header><div class="nav"><a class="brand" href="../"><img src="../channels4_profile (1).jpg" alt="logo"><span>WITH BAD DEVELOPMENT</span></a><a class="back" href="../">← Home</a></div></header>
-<main>
-<div class="label" id="survey-label">// initializing.stream</div><h1 id="survey-title">Loading Matrix</h1><p class="intro" id="survey-intro">Connecting params...</p>
-<div class="terminal"><div>&gt; compile_stream()</div><div>&gt; config_file: <span id="terminal-file">SEARCHING</span></div><div>&gt; status: <span id="terminal-status">PROCESSING</span></div><div>&gt;_</div></div>
-<form id="dynamic-survey-form" onsubmit="return false;"><div id="survey-container"></div><div class="submit-container" id="submit-box" style="display: none;"><button type="submit" class="submit-btn">Transmit Telemetry →</button></div></form>
-<footer>WITH BAD DEVELOPMENT · CENTER</footer>
-</main>
-<script>
-document.addEventListener("DOMContentLoaded",function(){
- const P_KEY="sFXveD7WBHt19lRyP",S_ID="service_survey",T_ID="Survey_Response";
- function initJS(){typeof emailjs!=="undefined"?emailjs.init({publicKey:P_KEY}):setTimeout(initJS,100)}initJS();
- fetch("survey.txt").then(res=>{if(!res.ok)throw new Error();return res.text()}).then(text=>{
-  document.getElementById("terminal-file").innerText="CONNECTED";document.getElementById("terminal-status").innerText="READY";document.getElementById("survey-label").innerText="// live.surveys";
-  const lines=text.split('\n'),container=document.getElementById("survey-container");let list=null,qCount=0;
-  lines.forEach(line=>{
-   const tr=line.trim();if(!tr)return;
-   if(tr.startsWith("[TITLE]"))document.getElementById("survey-title").innerText=tr.replace("[TITLE]","").trim();
-   else if(tr.startsWith("[INTRO]"))document.getElementById("survey-intro").innerText=tr.replace("[INTRO]","").trim();
-   else if(tr.startsWith("[QUESTION]")){
-    qCount++;const card=document.createElement("div");card.className="survey-card";
-    const h2=document.createElement("h2");h2.className="question-title";h2.innerText=`0${qCount}. ${tr.replace("[QUESTION]","").trim()}`;card.appendChild(h2);
-    list=document.createElement("div");list.className="options-list";card.appendChild(list);container.appendChild(card);
-   }else if(tr.startsWith("[OPTION]")&&list){
-    const opt=tr.replace("[OPTION]","").trim(),id=`q_${qCount}_opt_${Math.random().toString(36).substr(2,4)}`;
-    const lbl=document.createElement("label");lbl.className="option-label";lbl.setAttribute("for",id);
-    const rad=document.createElement("input");rad.type="radio";rad.name=`Question 0${qCount}`;rad.id=id;rad.value=opt;rad.required=true;
-    const sp=document.createElement("span");sp.innerText=opt;lbl.appendChild(rad);lbl.appendChild(sp);list.appendChild(lbl);
-   }
-  });
-  if(qCount>0)document.getElementById("submit-box").style.display="block";
- }).catch(()=>{
-  document.getElementById("terminal-file").innerText="ERROR";document.getElementById("terminal-status").innerText="OFFLINE";document.getElementById("survey-title").innerText="Error Config";
- });
- document.getElementById("dynamic-survey-form").addEventListener("submit",function(e){
-  e.preventDefault();if(typeof emailjs==="undefined"){alert("Loading setup...");return}
-  const btn=this.querySelector(".submit-btn");btn.innerText="SENDING...";btn.disabled=true;
-  let outStr="";new FormData(this).forEach((val,key)=>{outStr+=`${key}: ${val}\n`});
-  emailjs.send(S_ID,T_ID,{survey_data:outStr}).then(()=>{alert("Data logged!");this.reset()}).catch(()=>{alert("Failed.")}).finally(()=>{btn.innerText="Transmit Telemetry →";btn.disabled=false});
- });
-});
-</script>
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <header>
+    <div class="nav">
+
+      <a
+        class="brand"
+        href="../"
+        aria-label="With Bad Development Home"
+      >
+        <img
+          src="../channels4_profile (1).jpg"
+          alt="WITH BAD DEVELOPMENT logo"
+        >
+
+        <span>WITH BAD DEVELOPMENT</span>
+      </a>
+
+      <a
+        class="back"
+        href="../"
+      >
+        ← Home
+      </a>
+
+    </div>
+  </header>
+
+
+  <!-- =========================
+       MAIN
+  ========================== -->
+
+  <main>
+
+    <div
+      class="label"
+      id="survey-label"
+    >
+      // initializing.stream
+    </div>
+
+    <h1 id="survey-title">
+      Loading Matrix
+    </h1>
+
+    <p
+      class="intro"
+      id="survey-intro"
+    >
+      Connecting params...
+    </p>
+
+
+    <!-- Terminal -->
+
+    <div class="terminal">
+
+      <div>
+        &gt; compile_stream()
+      </div>
+
+      <div>
+        &gt; config_file:
+        <span id="terminal-file">
+          SEARCHING
+        </span>
+      </div>
+
+      <div>
+        &gt; status:
+        <span id="terminal-status">
+          PROCESSING
+        </span>
+      </div>
+
+      <div>
+        &gt;_
+      </div>
+
+    </div>
+
+
+    <!-- Survey -->
+
+    <form
+      id="dynamic-survey-form"
+      novalidate
+    >
+
+      <div
+        id="survey-container"
+        aria-live="polite"
+      >
+        <div class="loading">
+          Loading survey configuration...
+        </div>
+      </div>
+
+
+      <div
+        class="submit-container"
+        id="submit-box"
+        style="display:none;"
+      >
+        <button
+          type="submit"
+          class="submit-btn"
+          id="submit-btn"
+        >
+          Transmit Telemetry →
+        </button>
+      </div>
+
+      <div
+        id="form-status"
+        class="form-status"
+        role="status"
+        aria-live="polite"
+      ></div>
+
+    </form>
+
+
+    <footer>
+      WITH BAD DEVELOPMENT · CENTER
+    </footer>
+
+  </main>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+      /*
+       * ================================
+       * EMAILJS CONFIG
+       * ================================
+       */
+
+      const EMAILJS_PUBLIC_KEY = "sFXveD7WBHt19lRyP";
+      const EMAILJS_SERVICE_ID = "service_survey";
+      const EMAILJS_TEMPLATE_ID = "Survey_Response";
+
+
+      /*
+       * ================================
+       * ELEMENTS
+       * ================================
+       */
+
+      const form = document.getElementById(
+        "dynamic-survey-form"
+      );
+
+      const container = document.getElementById(
+        "survey-container"
+      );
+
+      const submitBox = document.getElementById(
+        "submit-box"
+      );
+
+      const submitButton = document.getElementById(
+        "submit-btn"
+      );
+
+      const statusBox = document.getElementById(
+        "form-status"
+      );
+
+      const terminalFile = document.getElementById(
+        "terminal-file"
+      );
+
+      const terminalStatus = document.getElementById(
+        "terminal-status"
+      );
+
+      const surveyTitle = document.getElementById(
+        "survey-title"
+      );
+
+      const surveyIntro = document.getElementById(
+        "survey-intro"
+      );
+
+      const surveyLabel = document.getElementById(
+        "survey-label"
+      );
+
+
+      /*
+       * ================================
+       * HELPERS
+       * ================================
+       */
+
+      function setStatus(message, type = "") {
+        statusBox.textContent = message;
+
+        statusBox.className = "form-status";
+
+        if (type) {
+          statusBox.classList.add(type);
+        }
+      }
+
+
+      function waitForEmailJS() {
+        return new Promise((resolve, reject) => {
+
+          let attempts = 0;
+
+          const maxAttempts = 100;
+
+          const timer = setInterval(() => {
+
+            attempts++;
+
+            if (
+              typeof emailjs !== "undefined"
+            ) {
+              clearInterval(timer);
+              resolve();
+              return;
+            }
+
+            if (attempts >= maxAttempts) {
+              clearInterval(timer);
+
+              reject(
+                new Error(
+                  "EmailJS failed to load."
+                )
+              );
+            }
+
+          }, 100);
+        });
+      }
+
+
+      function setTerminalStatus(
+        file,
+        status
+      ) {
+        terminalFile.textContent = file;
+        terminalStatus.textContent = status;
+      }
+
+
+      /*
+       * ================================
+       * INITIALIZE EMAILJS
+       * ================================
+       */
+
+      async function initializeEmailJS() {
+
+        try {
+
+          await waitForEmailJS();
+
+          emailjs.init({
+            publicKey: EMAILJS_PUBLIC_KEY
+          });
+
+          return true;
+
+        } catch (error) {
+
+          console.error(
+            "EmailJS initialization error:",
+            error
+          );
+
+          return false;
+        }
+      }
+
+
+      /*
+       * ================================
+       * LOAD SURVEY
+       * ================================
+       */
+
+      async function loadSurvey() {
+
+        try {
+
+          setTerminalStatus(
+            "CONNECTING",
+            "FETCHING"
+          );
+
+          const response = await fetch(
+            "survey.txt",
+            {
+              cache: "no-store"
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error(
+              `Survey file returned ${response.status}`
+            );
+          }
+
+          const text = await response.text();
+
+          parseSurvey(text);
+
+          setTerminalStatus(
+            "CONNECTED",
+            "READY"
+          );
+
+          surveyLabel.textContent =
+            "// live.surveys";
+
+        } catch (error) {
+
+          console.error(
+            "Survey loading error:",
+            error
+          );
+
+          setTerminalStatus(
+            "ERROR",
+            "OFFLINE"
+          );
+
+          surveyTitle.textContent =
+            "Error Config";
+
+          surveyIntro.textContent =
+            "Unable to load survey configuration.";
+
+          container.innerHTML = `
+            <div class="form-status error">
+              Survey configuration could not be loaded.
+              Check that <strong>survey.txt</strong>
+              exists beside this page.
+            </div>
+          `;
+        }
+      }
+
+
+      /*
+       * ================================
+       * PARSE SURVEY.TXT
+       * ================================
+       *
+       * Example survey.txt:
+       *
+       * [TITLE] Community Survey
+       * [INTRO] Tell us what you think.
+       *
+       * [QUESTION] How did you find us?
+       * [OPTION] YouTube
+       * [OPTION] Google
+       * [OPTION] Friend
+       *
+       * [QUESTION] Would you recommend us?
+       * [OPTION] Yes
+       * [OPTION] No
+       *
+       */
+
+      function parseSurvey(text) {
+
+        const lines = text.split(/\r?\n/);
+
+        let currentList = null;
+
+        let questionCount = 0;
+
+        container.innerHTML = "";
+
+
+        lines.forEach((line) => {
+
+          const trimmed = line.trim();
+
+          if (!trimmed) {
+            return;
+          }
+
+
+          /*
+           * TITLE
+           */
+
+          if (trimmed.startsWith("[TITLE]")) {
+
+            surveyTitle.textContent =
+              trimmed
+                .replace("[TITLE]", "")
+                .trim();
+
+            return;
+          }
+
+
+          /*
+           * INTRO
+           */
+
+          if (trimmed.startsWith("[INTRO]")) {
+
+            surveyIntro.textContent =
+              trimmed
+                .replace("[INTRO]", "")
+                .trim();
+
+            return;
+          }
+
+
+          /*
+           * QUESTION
+           */
+
+          if (trimmed.startsWith("[QUESTION]")) {
+
+            questionCount++;
+
+            const questionText =
+              trimmed
+                .replace("[QUESTION]", "")
+                .trim();
+
+
+            const card =
+              document.createElement("section");
+
+            card.className =
+              "survey-card";
+
+
+            const title =
+              document.createElement("h2");
+
+            title.className =
+              "question-title";
+
+
+            const number =
+              String(questionCount)
+                .padStart(2, "0");
+
+
+            title.textContent =
+              `${number}. ${questionText}`;
+
+
+            const options =
+              document.createElement("div");
+
+            options.className =
+              "options-list";
+
+
+            card.appendChild(title);
+            card.appendChild(options);
+
+            container.appendChild(card);
+
+
+            currentList = options;
+
+            return;
+          }
+
+
+          /*
+           * OPTION
+           */
+
+          if (
+            trimmed.startsWith("[OPTION]") &&
+            currentList
+          ) {
+
+            const optionText =
+              trimmed
+                .replace("[OPTION]", "")
+                .trim();
+
+
+            if (!optionText) {
+              return;
+            }
+
+
+            const label =
+              document.createElement("label");
+
+            label.className =
+              "option-label";
+
+
+            const radio =
+              document.createElement("input");
+
+            radio.type = "radio";
+
+            radio.required = true;
+
+            radio.name =
+              `Question ${String(questionCount).padStart(2, "0")}`;
+
+            radio.value =
+              optionText;
+
+
+            const optionId =
+              `q${questionCount}-${crypto.randomUUID()}`;
+
+            radio.id = optionId;
+
+            label.htmlFor = optionId;
+
+
+            const text =
+              document.createElement("span");
+
+            text.textContent =
+              optionText;
+
+
+            label.appendChild(radio);
+            label.appendChild(text);
+
+            currentList.appendChild(label);
+          }
+
+        });
+
+
+        /*
+         * MAKE SURE WE FOUND QUESTIONS
+         */
+
+        if (questionCount === 0) {
+
+          container.innerHTML = `
+            <div class="form-status error">
+              No questions were found in survey.txt.
+            </div>
+          `;
+
+          return;
+        }
+
+
+        submitBox.style.display = "block";
+      }
+
+
+      /*
+       * ================================
+       * SUBMIT SURVEY
+       * ================================
+       */
+
+      form.addEventListener(
+        "submit",
+        async (event) => {
+
+          event.preventDefault();
+
+
+          /*
+           * Browser validation
+           */
+
+          if (!form.checkValidity()) {
+
+            form.reportValidity();
+
+            return;
+          }
+
+
+          /*
+           * Disable button
+           */
+
+          submitButton.disabled = true;
+
+          submitButton.textContent =
+            "SENDING...";
+
+          setStatus("");
+
+
+          try {
+
+            /*
+             * Make sure EmailJS exists
+             */
+
+            await waitForEmailJS();
+
+
+            /*
+             * Collect survey responses
+             */
+
+            const formData =
+              new FormData(form);
+
+
+            const responses = [];
+
+
+            formData.forEach(
+              (value, key) => {
+
+                responses.push(
+                  `${key}: ${value}`
+                );
+
+              }
+            );
+
+
+            const surveyData =
+              responses.join("\n");
+
+
+            /*
+             * Send using EmailJS
+             */
+
+            await emailjs.send(
+              EMAILJS_SERVICE_ID,
+              EMAILJS_TEMPLATE_ID,
+              {
+                survey_data: surveyData
+              }
+            );
+
+
+            /*
+             * Success
+             */
+
+            setStatus(
+              "✓ Data transmitted successfully.",
+              "success"
+            );
+
+            form.reset();
+
+
+            /*
+             * Scroll status into view
+             */
+
+            statusBox.scrollIntoView({
+              behavior: "smooth",
+              block: "nearest"
+            });
+
+
+          } catch (error) {
+
+            console.error(
+              "Survey submission error:",
+              error
+            );
+
+
+            setStatus(
+              "Transmission failed. Please try again.",
+              "error"
+            );
+
+          } finally {
+
+            submitButton.disabled = false;
+
+            submitButton.textContent =
+              "Transmit Telemetry →";
+          }
+
+        }
+      );
+
+
+      /*
+       * ================================
+       * START
+       * ================================
+       */
+
+      loadSurvey();
+
+      initializeEmailJS();
+
+    });
+  </script>
+
 </body>
 </html>

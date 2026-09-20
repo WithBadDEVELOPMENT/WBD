@@ -50,84 +50,70 @@ footer{margin-top:60px;padding-top:25px;border-top:1px solid var(--wire);color:v
 </div>
 </header>
 <main>
-<div class="label" id="survey-label">// live.surveys</div>
-<h1 id="survey-title">Active Survey</h1>
-<p class="intro" id="survey-intro">Select your answers below to transmit telemetry logs directly to development.</p>
+<div class="label">// live.surveys</div>
+<h1>Active Survey</h1>
+<p class="intro">Select your answers below to transmit telemetry logs directly to development.</p>
 <div class="terminal">
     <div>&gt; compile_runtime_stream()</div>
     <div>&gt; server_status: <span>ONLINE</span></div>
     <div>&gt; connection: <span>READY</span></div>
     <div>&gt;_</div>
 </div>
-<form id="dynamic-survey-form">
-    <div id="survey-container"></div>
+
+<form id="dynamic-survey-form" onsubmit="return false;">
+    <div id="survey-container">
+        
+        <!-- QUESTION 1 -->
+        <div class="survey-card">
+            <h2 class="question-title">01. Which feature should we build next?</h2>
+            <div class="options-list">
+                <label class="option-label" for="q1_o1">
+                    <input type="radio" name="Question_01" id="q1_o1" value="Multiplayer Matchmaking Engine" required>
+                    <span>Multiplayer Matchmaking Engine</span>
+                </label>
+                <label class="option-label" for="q1_o2">
+                    <input type="radio" name="Question_01" id="q1_o2" value="Advanced Developer API Sandbox">
+                    <span>Advanced Developer API Sandbox</span>
+                </label>
+                <label class="option-label" for="q1_o3">
+                    <input type="radio" name="Question_01" id="q1_o3" value="Modding & Extension Support Docs">
+                    <span>Modding & Extension Support Docs</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- QUESTION 2 -->
+        <div class="survey-card">
+            <h2 class="question-title">02. What is your preferred platform?</h2>
+            <div class="options-list">
+                <label class="option-label" for="q2_o1">
+                    <input type="radio" name="Question_02" id="q2_o1" value="PC / Desktop Native Launcher" required>
+                    <span>PC / Desktop Native Launcher</span>
+                </label>
+                <label class="option-label" for="q2_o2">
+                    <input type="radio" name="Question_02" id="q2_o2" value="Web App Sandbox / GitHub Pages Embed">
+                    <span>Web App Sandbox / GitHub Pages Embed</span>
+                </label>
+                <label class="option-label" for="q2_o3">
+                    <input type="radio" name="Question_02" id="q2_o3" value="Mobile Interface Optimization">
+                    <span>Mobile Interface Optimization</span>
+                </label>
+            </div>
+        </div>
+
+    </div>
+
     <div class="submit-container">
         <button type="submit" class="submit-btn">Transmit Survey Telemetry →</button>
     </div>
 </form>
 <footer>WITH BAD DEVELOPMENT · SURVEY CENTER</footer>
 </main>
+
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    // Authenticated API credentials linked up safely
     const P_KEY = "sFXveD7WBHt19lRyP", S_ID = "service_survey", T_ID = "Survey_Response";
     emailjs.init({ publicKey: P_KEY });
-
-    // ==========================================
-    // EASY CONFIG BOX: UPDATE YOUR SURVEY TEXT RIGHT HERE
-    // ==========================================
-    const surveyConfig = [
-        {
-            question: "Which feature should we build next?",
-            options: ["Multiplayer Matchmaking Engine", "Advanced Developer API Sandbox", "Modding & Extension Support Docs"]
-        },
-        {
-            question: "What is your preferred platform?",
-            options: ["PC / Desktop Native Launcher", "Web App Sandbox / GitHub Pages Embed", "Mobile Interface Optimization"]
-        }
-    ];
-
-    // ==========================================
-    // RENDERING ENGINE (DO NOT TOUCH)
-    // ==========================================
-    const container = document.getElementById("survey-container");
-    surveyConfig.forEach((q, idx) => {
-        const qNum = idx + 1;
-        const card = document.createElement("div");
-        card.className = "survey-card";
-
-        const h2 = document.createElement("h2");
-        h2.className = "question-title";
-        h2.innerText = `0${qNum}. ${q.question}`;
-        card.appendChild(h2);
-
-        const list = document.createElement("div");
-        list.className = "options-list";
-
-        q.options.forEach(opt => {
-            const optId = `q_${qNum}_opt_${Math.random().toString(36).substr(2, 4)}`;
-            const lbl = document.createElement("label");
-            lbl.className = "option-label";
-            lbl.setAttribute("for", optId);
-
-            const rad = document.createElement("input");
-            rad.type = "radio";
-            rad.name = `Question 0${qNum}`;
-            rad.id = optId;
-            rad.value = opt;
-            rad.required = true;
-
-            const sp = document.createElement("span");
-            sp.innerText = opt;
-
-            lbl.appendChild(rad);
-            lbl.appendChild(sp);
-            list.appendChild(lbl);
-        });
-
-        card.appendChild(list);
-        container.appendChild(card);
-    });
 
     document.getElementById("dynamic-survey-form").addEventListener("submit", function(e) {
         e.preventDefault(); 
@@ -155,3 +141,4 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 </body>
 </html>
+

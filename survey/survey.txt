@@ -30,4 +30,4 @@
 [OPTION] No
 [OPTION] No Preference
 
-[QUESTION] That is all for this survey. Please hit: Submit Telemetry
+[QUESTION] That is all for this survey. Please hit: Submit Survey  Below!

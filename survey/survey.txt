@@ -1,51 +1,33 @@
-[TITLE] Active Development Survey
-[INTRO] Submit your answers to help us optimize the upcoming project roadmap variables.
+[TITLE] THE FOUNDATION: REWIND - SURVEY
+[INTRO] Submit your answers to help us with the project.
 
-[QUESTION] Opinion on what main ENGINE do you prefer for our games/apps going forward?
-[OPTION] UNITY
-[OPTION] Godot
-[OPTION] Unreal Engine
-[OPTION] VSCode
-[OPTION] Roblox
+[QUESTION] What part of the server should we post in more?
+[OPTION] Announcements (Ex: Releases, Trailers)
+[OPTION] Sneak peeks (Ex: Observatory, Prison)
+[OPTION] Updates - share progress of game through new features
+[OPTION] OtherStuff - dev sillies
 [OPTION] No Preference
 
 [QUESTION] What is your preferred PLATFORM?
 [OPTION] PC
 [OPTION] Console
 [OPTION] Mobile
-[OPTION] Virtual Reality
 [OPTION] No Preference
 
-[QUESTION] What is your preferred game GENRE?
-[OPTION] Horror
-[OPTION] Fantasy
-[OPTION] Puzzle
-[OPTION] Survival
-[OPTION] No Preference
+[QUESTION] What's your favorite THE FOUNDATION Build?
+[OPTION] Blue Build (Edgeware)
+[OPTION] Green Build (Dreamy)
+[OPTION] Green Build (Dreamy Released Build)
+[OPTION] Blue Build (Dreamy)
+[OPTION] Blue Build REWRITE
+[OPTION] Dark Green Build (Edgeware)
+[OPTION] Dark Green Build (Namegames)
+[OPTION] Release (Fixed Version - Namegames)
+[OPTION] Current Foundation
 
-[QUESTION] What would you like to see more of on this WEBSITE?
-[OPTION] Small Updates (Ex: Performance, and Bug Fixes.)
-[OPTION] Major Updates (Ex: New Features, and Customization.)
-[OPTION] Both
-[OPTION] Niether
-[OPTION] No Preference
-
-[QUESTION] What would you like to see more of in the future?
-[OPTION] More Original Games
-[OPTION] More Remakes
-[OPTION] Apps
-[OPTION] All Of The Above
-[OPTION] Niether
-[OPTION] No Preference
-
-[QUESTION] What type of MULTIPLAYER would you like to see in our games?
-[OPTION] Basic Multiplayer
-[OPTION] Co-op Multiplayer
-[OPTION] Competitive Multiplayer
-[OPTION] No Multiplayer
-[OPTION] No Preference
-
-[QUESTION] Would you like to see public BRANDING? (Ex: Merch, or Other Branding Assets.)
+[QUESTION] Would you like more Sneak Peeks in general? (Ex: Youtube, tiktok, Instagram, Discord, etc.)
 [OPTION] Yes
 [OPTION] No
 [OPTION] No Preference
+
+[QUESTION] That is all for this survey. Please hit: Submit Telemetry

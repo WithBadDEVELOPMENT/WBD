@@ -1,0 +1,33 @@
+[TITLE] THE FOUNDATION: REWIND - SURVEY
+[INTRO] Submit your answers to help us with the project.
+
+[QUESTION] What part of the server should we post in more?
+[OPTION] Announcements (Ex: Releases, Trailers)
+[OPTION] Sneak peeks (Ex: Observatory, Prison)
+[OPTION] Updates - share progress of game through new features
+[OPTION] OtherStuff - dev sillies
+[OPTION] No Preference
+
+[QUESTION] What is your preferred PLATFORM?
+[OPTION] PC
+[OPTION] Console
+[OPTION] Mobile
+[OPTION] No Preference
+
+[QUESTION] What's your favorite THE FOUNDATION Build?
+[OPTION] Blue Build (Edgeware)
+[OPTION] Green Build (Dreamy)
+[OPTION] Green Build (Dreamy Released Build)
+[OPTION] Blue Build (Dreamy)
+[OPTION] Blue Build REWRITE
+[OPTION] Dark Green Build (Edgeware)
+[OPTION] Dark Green Build (Namegames)
+[OPTION] Release (Fixed Version - Namegames)
+[OPTION] Current Foundation
+
+[QUESTION] Would you like more Sneak Peeks in general? (Ex: Youtube, tiktok, Instagram, Discord, etc.)
+[OPTION] Yes
+[OPTION] No
+[OPTION] No Preference
+
+[QUESTION] That is all for this survey. Please hit: Submit Survey  Below!
